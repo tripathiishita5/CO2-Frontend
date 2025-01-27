@@ -1,132 +1,226 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-const ProductTable = () => {
-  const [products, setProducts] = useState([
+const GHGEmissionsTables = () => {
+  const annualData = [
     {
       name: 'Scope 1: Direct Emissions',
-      price: 1999.99,
-      stock: 25,
-      type: 'Laptop',
-      status: 'Active'
+      fy2020: 852,
+      fy2021: 860,
+      fy2022: 515,
+      fy2023: 1009,
+      fy2024: 1258,
     },
     {
       name: 'Scope 2: Electricity Consumption',
-      price: 1199.99,
-      stock: 50,
-      type: 'Smartphone',
-      status: 'Active'
+      fy2020: 7024,
+      fy2021: 7882,
+      fy2022: 7933,
+      fy2023: 9359,
+      fy2024:7888
     },
     {
-      id: 'P003',
-      name: 'Scope 3: Indirect Emisions',
-      price: 2499.99,
-      stock: 12,
-      type: 'Electronics',
-      status: 'Active'
+      name: 'Scope 3: Indirect Emissions',
+      fy2020: 3885,
+      fy2021: 4861,
+      fy2022: 6015,
+      fy2023: 12013,
+      fy2024:5676
     },
     {
       name: 'Total GHG Emission',
-      price: 169.99,
-      stock: 80,
-      type: 'Apparel',
-      status: 'Active'
+      fy2020: 11760,
+      fy2021: 13604,
+      fy2022: 14462,
+      fy2023: 22382,
+      fy2024:14821
     },
     {
-      id: 'P005',
-      name: 'Bose Noise Cancelling Headphones 700',
-      price: 379.99,
-      stock: 30,
-      type: 'Electronics',
-      status: 'Active'
+      name: 'Emission Intensity',
+      fy2020: 0.0035,
+      fy2021: 0.00424,
+      fy2022: 0.00560,
+      fy2023: 0.00661,
+      fy2024:0.00720
+    },
+    {
+      name: 'Emission Intensity in kgCO2 eg',
+      fy2020: 3.51,
+      fy2021: 4.24,
+      fy2022: 5.60,
+      fy2023: 6.61,
+      fy2024:7.20
     }
-  ]);
+  ];
 
+  const quarterlyData = [
+    {
+      name: 'Scope 1: Direct Emissions',
+      q1: 490.07,
+      q2: 472.57,
+      q3: 402.56,
+      q4: 385.05,
+    },
+    {
+      name: 'Scope 2: Electricity Consumption',
+      q1: 294.07,
+      q2: 283.57,
+      q3: 241.56,
+      q4: 231.05,
+    },
+    {
+      name: 'Scope 3: Indirect Emissions',
+      q1: 658.07,
+      q2: 634.57,
+      q3: 540.56,
+      q4: 517.05,
+    },
+    {
+      name: 'Total GHG Emission',
+      q1: 1442.21,
+      q2: 1390.70,
+      q3: 1184.67,
+      q4: 1133.17,
+    }
+  ];
 
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axios.get('/api/products');
-  //       setProducts(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching products:', error);
-  //     }
-  //   };
+  const monthlyData = [
+    {
+      name: 'Scope 1: Direct Emissions',
+      current: 145.85,
+      previous: 153.15,
+      variance: -5.0,
+      ytd: 1750.25,
+    },
+    {
+      name: 'Scope 2: Electricity Consumption',
+      current: 87.52,
+      previous: 91.90,
+      variance: -5.0,
+      ytd: 1050.25,
+    },
+    {
+      name: 'Scope 3: Indirect Emissions',
+      current: 195.85,
+      previous: 205.65,
+      variance: -5.0,
+      ytd: 2350.25,
+    },
+    {
+      name: 'Total GHG Emission',
+      current: 429.23,
+      previous: 450.69,
+      variance: -5.0,
+      ytd: 5150.75,
+    }
+  ];
 
-  //   fetchProducts();
-  // }, []);
+  const targetData = [
+    {
+      name: 'Scope 1: Direct Emissions',
+      target: 1662.74,
+      actual: 1750.25,
+      variance: 5.0,
+    },
+    {
+      name: 'Scope 2: Electricity Consumption',
+      target: 997.74,
+      actual: 1050.25,
+      variance: 5.0,
+    },
+    {
+      name: 'Scope 3: Indirect Emissions',
+      target: 2232.74,
+      actual: 2350.25,
+      variance: 5.0,
+    },
+    {
+      name: 'Total GHG Emission',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+    }
+  ];
 
-
-  const handleEdit = (product) => {
-    // Implement edit functionality
-    console.log('Editing product:', product);
-  };
-
-  const handleDelete = (product) => {
-    // Implement delete functionality
-    console.log('Deleting product:', product);
-  };
+  const tables = [
+    {
+      title: 'Scope Wise GHG Emissions',
+      description: 'Year-over-year comparison of emissions by scope',
+      data: annualData,
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+    },
+    {
+      title: 'Quarterly GHG Emissions (Current FY)',
+      description: 'Quarter-wise breakdown of current fiscal year emissions',
+      data: quarterlyData,
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+    },
+    {
+      title: 'Monthly GHG Emissions',
+      description: 'Month-over-month comparison with YTD totals',
+      data: monthlyData,
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+    },
+    {
+      title: 'Target vs Actual Emissions',
+      description: 'Comparison of targeted and actual emissions for current fiscal year',
+      data: targetData,
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+    }
+  ];
 
   return (
-    <div className="bg-gray-100 py-8">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-[#805AD5]">Scope Wise GHG Emission(tCO2e)</h1>
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <table className="w-full table-auto border-collapse">
-            <thead>
-              <tr className="bg-[#805AD5] text-white">
-                <th className="px-6 py-4 text-left">FY2020-21</th>
-                <th className="px-6 py-4 text-left">FY2021-22</th>
-                <th className="px-6 py-4 text-right">FY2022-23</th>
-                <th className="px-6 py-4 text-right">FY2023-24</th>
-                <th className="px-6 py-4 text-left">FY2024-25</th>
-                <th className="px-6 py-4 text-left">Status</th>
-                <th className="px-6 py-4 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id} className="border-b border-gray-200">
-                  <td className="px-6 py-4">{product.name}</td>
-                  <td className="px-6 py-4">{product.id}</td>
-                  <td className="px-6 py-4 text-right">${product.price.toFixed(2)}</td>
-                  <td className="px-6 py-4 text-right">{product.stock}</td>
-                  <td className="px-6 py-4">{product.type}</td>
-                  <td className="px-6 py-4">{product.status}</td>
-                  <td className="px-6 py-4 space-x-4">
-                  <div className="space-x-4">
-                  <div className="space-x-4">
-                  <div className="flex space-x-4">
-  <button
-    className="bg-indigo-600 hover:bg-indigo-800 text-white font-semibold py-1 px-3 rounded-md shadow-sm transition-all duration-300 ease-in-out transform hover:scale-105"
-    onClick={() => handleEdit(product)}
-  >
-    Edit
-  </button>
+    <div className="bg-gray-50 min-h-screen">
+      {tables.map((table, index) => (
+        <div key={index} className="min-h-screen flex flex-col justify-center px-4 py-8">
+          <div className="max-w-8xl mx-auto w-full flex gap-6">
+            <div className="w-3/4 bg-white rounded-xl shadow-xl overflow-hidden">
+              <div className="p-6">
+                <h2 className="text-2xl font-bold text-[#805AD5] mb-2">{table.title}</h2>
+                <p className="text-gray-600 mb-6">{table.description}</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-[#805AD5]">
+                        {table.columns.map((column, i) => (
+                          <th key={i} className="px-6 py-4 text-left text-white font-semibold">
+                            {column}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {table.data.map((row, i) => (
+                        <tr key={i} className="border-b border-gray-200 hover:bg-gray-50">
+                          <td className="px-6 py-4 font-medium">{row.name}</td>
+                          {/* {Object.keys(row).filter(key => key !== 'name').map((key, j) => (
+                            <td key={j} className="px-6 py-4 text-right">
+                              {typeof row[key] === 'number' ? row[key].toFixed(2) : row[key]}
+                            </td>
+                          ))} */}
+                          {Object.keys(row).filter(key => key !== 'name').map((key, j) => (
+  <td key={j} className="px-6 py-4 text-right">
+    {typeof row[key] === 'number' ? row[key] : row[key]}
+  </td>
+))}
 
-  <button
-    className="bg-red-600 hover:bg-red-800 text-white font-semibold py-1 px-3 rounded-md shadow-sm transition-all duration-300 ease-in-out transform hover:scale-105"
-    onClick={() => handleDelete(product)}
-  >
-    Delete
-  </button>
-</div>
-
-
-</div>
-
-</div>
-
-
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <div className="w-1/4 bg-white rounded-xl shadow-xl p-6">
+              <div className="h-full flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg">
+                <p className="text-gray-500 text-center">Graph Space Reserved</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };
 
-export default ProductTable;
+export default GHGEmissionsTables;

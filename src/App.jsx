@@ -1,8 +1,10 @@
-import Login from "./Login.jsx"
+import Table from "./Pages/Dashboard/Table.jsx"
+import Login from "./Pages/Login.jsx"
 function App() {
   return (
     <>
-      <Login></Login>
+     <Login/>
+     <Table/>
     </>
   )
 }

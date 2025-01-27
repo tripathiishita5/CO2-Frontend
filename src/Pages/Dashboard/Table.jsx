@@ -4,7 +4,6 @@ import axios from 'axios';
 const ProductTable = () => {
   const [products, setProducts] = useState([
     {
-      id: 'P001',
       name: 'Scope 1: Direct Emissions',
       price: 1999.99,
       stock: 25,
@@ -12,7 +11,6 @@ const ProductTable = () => {
       status: 'Active'
     },
     {
-      id: 'P002',
       name: 'Scope 2: Electricity Consumption',
       price: 1199.99,
       stock: 50,
@@ -28,7 +26,6 @@ const ProductTable = () => {
       status: 'Active'
     },
     {
-      id: 'P004',
       name: 'Total GHG Emission',
       price: 169.99,
       stock: 80,

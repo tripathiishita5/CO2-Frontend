@@ -1,4 +1,9 @@
 import React from 'react';
+import Graph from "./Graph";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 
 const GHGEmissionsTables = () => {
   const annualData = [
@@ -167,6 +172,53 @@ const GHGEmissionsTables = () => {
       columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
     }
   ];
+  // Custom Next Arrow
+const CustomNextArrow = ({ className, style, onClick }) => (
+  <div
+    className={className}
+    style={{
+      ...style,
+      display: "block",
+      backgroundColor: "#830c59",
+      borderRadius: "50%",
+       marginRight:"30px"
+       
+    }}
+    onClick={onClick}
+  />
+);
+
+// Custom Prev Arrow
+const CustomPrevArrow = ({ className, style, onClick }) => (
+  <div
+    className={className}
+    style={{
+      ...style,
+      display: "block",
+      backgroundColor: "#830c59",
+      borderRadius: "50%",
+      marginLeft:"30px",
+      zIndex:"1"
+    }}
+    onClick={onClick}
+  />
+);
+
+
+  const years = ["fy2020", "fy2021", "fy2022", "fy2023", "fy2024"];
+// Carousel settings
+const settings = {
+  dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,  
+    pauseOnHover: true,
+    nextArrow: <CustomNextArrow />,
+  prevArrow: <CustomPrevArrow />
+};
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -175,12 +227,12 @@ const GHGEmissionsTables = () => {
           <div className="max-w-8xl mx-auto w-full flex gap-6">
             <div className="w-3/4 bg-white rounded-xl shadow-xl overflow-hidden">
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-[#805AD5] mb-2">{table.title}</h2>
+                <h2 className="text-2xl font-bold text-[#830c59] mb-2">{table.title}</h2>
                 <p className="text-gray-600 mb-6">{table.description}</p>
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse">
                     <thead>
-                      <tr className="bg-[#805AD5]">
+                      <tr className="bg-[#830c59]">
                         {table.columns.map((column, i) => (
                           <th key={i} className="px-6 py-4 text-left text-white font-semibold">
                             {column}
@@ -211,10 +263,48 @@ const GHGEmissionsTables = () => {
               </div>
             </div>
             
-            <div className="w-1/4 bg-white rounded-xl shadow-xl p-6">
-              <div className="h-full flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg">
-                <p className="text-gray-500 text-center">Graph Space Reserved</p>
-              </div>
+            <div className="w-1/4 bg-white rounded-xl shadow-xl ">
+            <h2 className="text-xl font-semibold mb-4 mt-4 text-center text-[#830c59]">
+              Graphs
+            </h2>
+             
+
+<Slider {...settings}>
+  {years.map((year, index) => {
+    const graphData =
+      table.title === "Scope Wise GHG Emissions"
+        ? table.data
+            .filter((item) =>
+              ["Scope 1: Direct Emissions", "Scope 2: Electricity Consumption", "Scope 3: Indirect Emissions"].includes(item.name)
+            )
+            .map((item) => ({
+              name: item.name.split(":")[0], // Extracting scope name
+              value: item[year],
+            }))
+        : table.data.map((item) => ({
+            name: item.name.split(":")[0], // Extracting scope name
+            value: item[year],
+          }));
+
+    // Determine the graph type based on the table title
+    const graphType =
+      table.title === "Scope Wise GHG Emissions"
+        ? "pie"
+        : "bar";
+
+    return (
+      <div key={index}>
+        <h3 className="text-lg font-bold text-center mb-4">
+          {year.toUpperCase()}
+        </h3>
+        <Graph data={graphData} type={graphType} />
+      </div>
+    );
+  })}
+</Slider>
+
+
+          
             </div>
           </div>
         </div>

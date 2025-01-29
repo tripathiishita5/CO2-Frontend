@@ -7,6 +7,7 @@ function Input() {
         ac_year: '',
         month: '',
         location: '',
+        user_id: 5, // Hardcoded for now, should come from auth context
 
         // Scope toggles
         scope1Open: true,
@@ -76,7 +77,116 @@ function Input() {
         };
 
         fetchScopeData();
-    }, []);
+    }, [scopeData]);
+
+    // Modified effect to handle cases when no data exists
+    useEffect(() => {
+        const fetchInputData = async () => {
+            if (formState.ac_year && formState.month && formState.location) {
+                try {
+                    const response = await fetch(
+                        `http://localhost:5000/api/auth/get-input-data/${formState.ac_year}/${formState.month}/${formState.location}/${formState.user_id}`
+                    );
+                    const data = await response.json();
+
+                    if (data && data.length > 0) {
+                        // Update form values with the fetched data
+                        setFormValues(prev => ({
+                            ...prev,
+                            ...data[0]
+                        }));
+                    } else {
+                        // Reset all form values to empty strings if no data exists
+                        setFormValues({
+                            // Scope 1
+                            diesel_dg_set: '',
+                            diesel_others: '',
+                            petrol: '',
+                            lpg_process: '',
+                            r22: '',
+                            r134a: '',
+                            r410: '',
+                            r401: '',
+                            r32: '',
+                            co2: '',
+                            grid: '',
+
+                            // Scope 2
+                            renewable_energy: '',
+                            steam: '',
+                            elec_consumption_grid: '',
+                            t_and_d_losses: '',
+
+                            // Scope 3
+                            lpg_canteen: '',
+                            rmt_road: '',
+                            rmt_rail: '',
+                            rmt_ship: '',
+                            rmt_air: '',
+                            tow_road: '',
+                            bt_air: '',
+                            bt_rail: '',
+                            bt_bus: '',
+                            bt_car: '',
+                            ec_bus: '',
+                            ec_bike: '',
+                            ec_car: '',
+                            ec_train: '',
+                            fpd_road: '',
+                            fpd_rail: '',
+                            fpd_ship: '',
+                            fpd_air: ''
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error fetching input data:', error);
+                    // Reset form values on error as well
+                    setFormValues({
+                        // Scope 1
+                        diesel_dg_set: '',
+                        diesel_others: '',
+                        petrol: '',
+                        lpg_process: '',
+                        r22: '',
+                        r134a: '',
+                        r410: '',
+                        r401: '',
+                        r32: '',
+                        co2: '',
+                        grid: '',
+
+                        // Scope 2
+                        renewable_energy: '',
+                        steam: '',
+                        elec_consumption_grid: '',
+                        t_and_d_losses: '',
+
+                        // Scope 3
+                        lpg_canteen: '',
+                        rmt_road: '',
+                        rmt_rail: '',
+                        rmt_ship: '',
+                        rmt_air: '',
+                        tow_road: '',
+                        bt_air: '',
+                        bt_rail: '',
+                        bt_bus: '',
+                        bt_car: '',
+                        ec_bus: '',
+                        ec_bike: '',
+                        ec_car: '',
+                        ec_train: '',
+                        fpd_road: '',
+                        fpd_rail: '',
+                        fpd_ship: '',
+                        fpd_air: ''
+                    });
+                }
+            }
+        };
+
+        fetchInputData();
+    }, [formState.ac_year, formState.month, formState.location, formState.user_id]);
 
     const handleInputChange = (field, value) => {
         if (['ac_year', 'month', 'location'].includes(field)) {
@@ -108,7 +218,8 @@ function Input() {
             ...formValues,
             location: formState.location,
             month: formState.month,
-            ac_year: formState.ac_year
+            ac_year: formState.ac_year,
+            user_id: formState.user_id
         };
 
         try {

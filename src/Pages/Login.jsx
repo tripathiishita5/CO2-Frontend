@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { User, Lock, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate(); // Initialize navigate
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,6 +33,8 @@ function Login() {
             const data = await response.json();
             console.log('Login successful:', data);
             // Handle successful login here (e.g., store token, redirect, etc.)
+             // Redirect to Table page after successful login
+             navigate('/dashboard');
 
         } catch (err) {
             setError('Login failed. Please check your credentials and try again.');

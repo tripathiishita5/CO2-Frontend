@@ -3,6 +3,7 @@ import Graph from "./Graph";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import BarGraphContainer from './BarGraph';
 
 
 const GHGEmissionsTables = () => {
@@ -340,6 +341,8 @@ const settings = {
     nextArrow: <CustomNextArrow />,
   prevArrow: <CustomPrevArrow />
 };
+const pieChartTables = ["Scope Wise GHG Emissions"];
+
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -390,7 +393,7 @@ const settings = {
             </h2>
              
 
-<Slider {...settings}>
+{/* <Slider {...settings}>
   {years.map((year, index) => {
     const graphData =
       table.title === "Scope Wise GHG Emissions"
@@ -422,7 +425,51 @@ const settings = {
       </div>
     );
   })}
-</Slider>
+</Slider> */}
+{/* Slider for Pie Charts */}
+{pieChartTables.includes(table.title) && (
+      <Slider {...settings}>
+        {years.map((year, index) => {
+          const graphData = table.data
+            .filter((item) =>
+              ["Scope 1: Direct Emissions", "Scope 2: Electricity Consumption", "Scope 3: Indirect Emissions"].includes(item.name)
+            )
+            .map((item) => ({
+              name: item.name.split(":")[0], // Extracting scope name
+              value: item[year],
+            }));
+
+          return (
+            <div key={index}>
+              <h3 className="text-lg font-bold text-center mb-4">{year.toUpperCase()}</h3>
+              <Graph data={graphData} type="pie" />
+            </div>
+          );
+        })}
+      </Slider>
+    )}
+
+    {/* Slider for Bar Charts */}
+    {!pieChartTables.includes(table.title) && (
+      <Slider {...settings}>
+      {quarterlyData.map((row, index) => {
+        const graphData = Object.keys(row)
+          .filter((key) => key !== "name")
+          .map((key) => ({
+            name: key.toUpperCase(), // X-axis labels (q1, q2, q3, q4, q5)
+            value: row[key], // Y-axis values
+          }));
+    
+        return (
+          <div key={index}>
+            <h3 className="text-lg font-bold text-center mb-4">{row.name}</h3>
+            <Graph data={graphData} type="bar" />
+          </div>
+        );
+      })}
+    </Slider>
+    
+    )}
 
 
           

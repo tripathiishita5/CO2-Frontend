@@ -1,16 +1,14 @@
-import React from 'react';
-import Navbar from '../Navbar';
-
+import Navbar from '../Navbar'; // Assuming Navbar component is in this path
  
-const Layout = ({ children }) => {
+const Layout = ({ children, showNavbar = true }) => {
   return (
     <div>
-      <Navbar />
-      
-        {children}  {/* This will render the page content */}
-
+      {showNavbar && <Navbar />}   
+      <main>
+        {children}
+      </main>
     </div>
   );
-}
+};
  
 export default Layout;

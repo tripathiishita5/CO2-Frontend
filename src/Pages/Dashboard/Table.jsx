@@ -60,114 +60,214 @@ const GHGEmissionsTables = () => {
   const quarterlyData = [
     {
       name: 'Scope 1: Direct Emissions',
-      q1: 490.07,
-      q2: 472.57,
-      q3: 402.56,
-      q4: 385.05,
+      q1: 852,
+      q2: 860,
+      q3: 515,
+      q4: 1009,
+      q5: 1258,
     },
     {
       name: 'Scope 2: Electricity Consumption',
-      q1: 294.07,
-      q2: 283.57,
-      q3: 241.56,
-      q4: 231.05,
+      q1: 7024,
+      q2: 7882,
+      q3: 7933,
+      q4: 9359,
+      q5: 7888
     },
     {
       name: 'Scope 3: Indirect Emissions',
-      q1: 658.07,
-      q2: 634.57,
-      q3: 540.56,
-      q4: 517.05,
+      q1: 3885,
+      q2: 4861,
+      q3: 6014,
+      q4: 12013,
+      q5: 5676,
     },
     {
       name: 'Total GHG Emission',
-      q1: 1442.21,
-      q2: 1390.70,
-      q3: 1184.67,
-      q4: 1133.17,
+      q1: 11760,
+      q2: 13604,
+      q3: 14462,
+      q4: 22382,
+      q5: 14812
     }
   ];
 
   const monthlyData = [
     {
-      name: 'Scope 1: Direct Emissions',
-      current: 145.85,
-      previous: 153.15,
-      variance: -5.0,
-      ytd: 1750.25,
+      name: 'SND',
+      current: 2472,
+      previous: 3454,
+      variance: 4383,
+      ytd: 9620,
+      uo:4403,
     },
     {
-      name: 'Scope 2: Electricity Consumption',
-      current: 87.52,
-      previous: 91.90,
-      variance: -5.0,
-      ytd: 1050.25,
+      name: 'BIA',
+      current: 5493,
+      previous: 5920,
+      variance: 5125,
+      ytd: 7373,
+      uo:6431,
     },
     {
-      name: 'Scope 3: Indirect Emissions',
-      current: 195.85,
-      previous: 205.65,
-      variance: -5.0,
-      ytd: 2350.25,
+      name: 'SLN',
+      current: 1449,
+      previous: 1427,
+      variance: 682,
+      ytd: 1385,
+      uo:708,
     },
     {
-      name: 'Total GHG Emission',
-      current: 429.23,
-      previous: 450.69,
-      variance: -5.0,
-      ytd: 5150.75,
+      name: 'Bristrol',
+      current: 286,
+      previous: 321,
+      variance: 255,
+      ytd: 228,
+      uo:114,
+    },
+    {
+      name: 'Itlay',
+      current: 0,
+      previous: 0,
+      variance: 0,
+      ytd:  0,
+      uo:0,
     }
   ];
 
   const targetData = [
     {
-      name: 'Scope 1: Direct Emissions',
-      target: 1662.74,
+      name: 'Australia',
+      target: 136,
       actual: 1750.25,
       variance: 5.0,
+      hi: 30,
+      no: 60
     },
     {
-      name: 'Scope 2: Electricity Consumption',
+      name: 'Sweden',
       target: 997.74,
       actual: 1050.25,
       variance: 5.0,
+      hi: 30,
+      no: 60
     },
     {
-      name: 'Scope 3: Indirect Emissions',
+      name: 'Chandlers Ford',
       target: 2232.74,
       actual: 2350.25,
       variance: 5.0,
+      hi: 30,
+      no: 60
     },
     {
-      name: 'Total GHG Emission',
+      name: 'Zurich',
       target: 4893.21,
       actual: 5150.75,
       variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'UAE',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'PIA',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'MIA',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'RO Gurgaon',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'RO Mumbai',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'RO Kolkata',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'RO Bengaluru',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'SESL Gurgaon',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'SESL Kolkata',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
+    },
+    {
+      name: 'SESL Mumbai',
+      target: 4893.21,
+      actual: 5150.75,
+      variance: 5.0,
+      hi: 30,
+      no: 60
     }
   ];
 
   const tables = [
     {
       title: 'Scope Wise GHG Emissions',
-      description: 'Year-over-year comparison of emissions by scope',
       data: annualData,
       columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
     },
     {
-      title: 'Quarterly GHG Emissions (Current FY)',
-      description: 'Quarter-wise breakdown of current fiscal year emissions',
+      title: 'Scope Wise GHG Emissions(tCo2e)', 
       data: quarterlyData,
       columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
     },
     {
-      title: 'Monthly GHG Emissions',
-      description: 'Month-over-month comparison with YTD totals',
+      title: 'GHG Emissions', 
       data: monthlyData,
       columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
     },
     {
-      title: 'Target vs Actual Emissions',
-      description: 'Comparison of targeted and actual emissions for current fiscal year',
+      title: 'GHG Emissions(tCo2e)',
       data: targetData,
       columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
     }
@@ -178,14 +278,24 @@ const CustomNextArrow = ({ className, style, onClick }) => (
     className={className}
     style={{
       ...style,
-      display: "block",
-      backgroundColor: "#830c59",
-      borderRadius: "50%",
-       marginRight:"30px"
-       
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: "45px",
+      background: "none",
     }}
     onClick={onClick}
-  />
+  >
+    {/* PNG for Next Arrow */}
+    <img
+      src="src\Images\nextarrow.png" // Replace with the path to your PNG file
+      alt="Next"
+      style={{
+        width: "15px",
+        height: "15px",
+      }}
+    />
+  </div>
 );
 
 // Custom Prev Arrow
@@ -194,14 +304,25 @@ const CustomPrevArrow = ({ className, style, onClick }) => (
     className={className}
     style={{
       ...style,
-      display: "block",
-      backgroundColor: "#830c59",
-      borderRadius: "50%",
-      marginLeft:"30px",
-      zIndex:"1"
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      marginLeft: "30px",
+      zIndex: 1,
+      background: "white",
     }}
     onClick={onClick}
-  />
+  >
+    {/* PNG for Prev Arrow */}
+    <img
+      src="src\Images\prevarrow.png" // Replace with the path to your PNG file
+      alt="Previous"
+      style={{
+        width: "17px",
+        height: "17px",
+      }}
+    />
+  </div>
 );
 
 

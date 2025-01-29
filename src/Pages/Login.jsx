@@ -4,10 +4,40 @@ import { User, Lock, ArrowRight } from 'lucide-react';
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle login logic here
+        setError('');
+        setIsLoading(true);
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: username,
+                    password: password
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+
+            const data = await response.json();
+            console.log('Login successful:', data);
+            // Handle successful login here (e.g., store token, redirect, etc.)
+
+        } catch (err) {
+            setError('Login failed. Please check your credentials and try again.');
+            console.error('Login error:', err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -30,6 +60,12 @@ function Login() {
                             <p className="mt-2 text-gray-600">Please sign in to your account</p>
                         </div>
 
+                        {error && (
+                            <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">
+                                {error}
+                            </div>
+                        )}
+
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-4">
                                 <div>
@@ -39,7 +75,7 @@ function Login() {
                                             value={username}
                                             onChange={(e) => setUsername(e.target.value)}
                                             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-600 focus:border-transparent pl-12 transition-all duration-200"
-                                            placeholder="Username"
+                                            placeholder="User ID"
                                             required
                                         />
                                         <User className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
@@ -83,10 +119,15 @@ function Login() {
 
                             <button
                                 type="submit"
-                                className="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#820C59] hover:bg-[#722156] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
+                                disabled={isLoading}
+                                className="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#820C59] hover:bg-[#722156] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Sign In
-                                <ArrowRight className="ml-2 h-5 w-5" />
+                                {isLoading ? 'Signing In...' : (
+                                    <>
+                                        Sign In
+                                        <ArrowRight className="ml-2 h-5 w-5" />
+                                    </>
+                                )}
                             </button>
                         </form>
                     </div>

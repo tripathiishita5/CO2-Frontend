@@ -18,23 +18,39 @@ const Graph = ({ data = [], type = "pie" }) => {
     );
   }
 
-  if (type === "bar") {
+  if (type === "bar" && data[0].q1 !== undefined) {
+    // Transform data for Bar Chart
+    const transformedData = ["q1", "q2", "q3", "q4", "q5"].map((quarter) => {
+      const quarterData = { quarter: quarter.toUpperCase() }; // Start with quarter label
+      data.forEach((row) => {
+        quarterData[row.name.split(":")[0]] = row[quarter]; // Add each scope's data
+      });
+      return quarterData;
+    });
+  
     return (
-        <div className="bg-white shadow-lg rounded-lg p-4">
+      <div className="bg-white shadow-lg rounded-lg p-4">
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <BarChart data={transformedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="quarter" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="value" fill="#830c59" barSize={30} />
+            {data.map((row, index) => (
+              <Bar
+                key={row.name}
+                dataKey={row.name.split(":")[0]} // Use the scope name (e.g., "Scope 1")
+                fill={COLORS[index % COLORS.length]}
+                barSize={30}
+              />
+            ))}
           </BarChart>
         </ResponsiveContainer>
       </div>
-     
     );
   }
+  
 
   // Default to pie chart
   return (

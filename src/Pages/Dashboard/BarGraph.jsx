@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   BarChart,
@@ -18,7 +17,7 @@ const COLORS = [
   "#a65381", "#4a0730",
 ];
 
-const BarGraph = ({ title, data }) => {
+const BarGraph = ({ title, data, keys }) => {
   if (!data || !data.length) {
     return <p className="text-gray-500 text-center">No data available for the bar chart.</p>;
   }
@@ -29,44 +28,51 @@ const BarGraph = ({ title, data }) => {
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="quarter" />
+          <XAxis dataKey="label" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="value" fill={COLORS[0]} barSize={40} />
+          {keys.map((key, index) => (
+            <Bar key={key} dataKey={key} fill={COLORS[index % COLORS.length]} barSize={40} />
+          ))}
         </BarChart>
       </ResponsiveContainer>
     </div>
   );
 };
 
-const BarGraphContainer = ({ quarterlyData }) => {
-  if (!quarterlyData || !quarterlyData.length) {
-    return <p className="text-gray-500 text-center">No data available.</p>;
+const BarGraphContainer = ({ tableName, data }) => {
+  if (!data || !data.length) {
+    return <p className="text-gray-500 text-center">No data available for {tableName}.</p>;
   }
+
+  const transformData = (data) => {
+    const keys = new Set();
+
+    const transformed = data.map((row) => {
+      const obj = { label: row.name };
+
+      Object.keys(row).forEach((key) => {
+        if (key !== "name") {
+          obj[key.toUpperCase()] = row[key];
+          keys.add(key.toUpperCase());
+        }
+      });
+
+      return obj;
+    });
+
+    return { transformed, keys: Array.from(keys) };
+  };
+
+  const { transformed, keys } = transformData(data);
 
   return (
     <div className="grid grid-cols-1 gap-6">
-      {quarterlyData.map((row, index) => {
-        // Transform the row into chart-compatible format
-        const chartData = Object.keys(row)
-          .filter((key) => key.startsWith("q"))
-          .map((quarterKey, idx) => ({
-            quarter: `FY${2020 + idx}-${21 + idx}`, // Create FY2020-21, FY2021-22 labels
-            value: row[quarterKey],
-          }));
-
-        return (
-          <BarGraph
-            key={index}
-            title={row.name} // Chart title from the 'name' key
-            data={chartData}
-          />
-        );
-      })}
+      <h2 className="text-2xl font-semibold text-center mb-4">{tableName}</h2>
+      <BarGraph title={tableName} data={transformed} keys={keys} />
     </div>
   );
 };
 
 export default BarGraphContainer;
-

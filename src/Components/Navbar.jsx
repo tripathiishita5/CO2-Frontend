@@ -71,7 +71,7 @@ const Navbar = () => {
             </a>
             <a
               href="/activity-scope"
-              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 pr-20 py-2 transition-all duration-300 rounded-md"
+              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 mr-30 py-2 transition-all duration-300 rounded-md"
             >
               Activity Data
             </a>

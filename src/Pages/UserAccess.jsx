@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios"; // Import Axios
 import { User, Lock, Calendar, MapPin, Settings } from "lucide-react";
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  
 function UserAccess() {
     const [userId, setUserId] = useState("");
@@ -36,8 +38,12 @@ function UserAccess() {
                 }
             });
             console.log("User Access Data Submitted:", response.data); // Log the response data after the request is completed
+             // Display success toast
+        toast.success("User data submitted successfully!");
         } catch (error) {
             console.error("Error submitting user data:", error); // Log any errors in the request
+            // Display error toast
+        toast.error("Error submitting user data!");
         }
  
     };
@@ -181,6 +187,7 @@ function UserAccess() {
                             >
                                 Save User Access
                             </button>
+                            <ToastContainer />
                         </form>
                     </div>
                 </div>
@@ -190,3 +197,4 @@ function UserAccess() {
 }
  
 export default UserAccess;
+ 

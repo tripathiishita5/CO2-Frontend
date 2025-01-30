@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, Save, AlertCircle } from 'lucide-react';
-
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Input() {
     const [formState, setFormState] = useState({
         // Mandatory fields
@@ -232,9 +233,13 @@ function Input() {
             });
 
             if (response.ok) {
-                alert('Data saved successfully!');
+                 
+                 // Display success toast
+        toast.success("Data saved successfully!");
             } else {
-                alert('Error saving data. Please try again.');
+                
+                // Display error toast
+        toast.error("Error saving data. Please try again.");
             }
         } catch (error) {
             console.error('Error saving data:', error);
@@ -465,6 +470,7 @@ function Input() {
                             <Save size={16} className="mr-2" />
                             Save All Data
                         </button>
+                        <ToastContainer />
                     </>
                 )}
             </form>

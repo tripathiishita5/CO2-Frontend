@@ -3,7 +3,7 @@ import Graph from "./Graph";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import BarGraphContainer from './BarGraph';
+
 
 
 const GHGEmissionsTables = () => {
@@ -61,193 +61,193 @@ const GHGEmissionsTables = () => {
   const quarterlyData = [
     {
       name: 'Scope 1: Direct Emissions',
-      q1: 852,
-      q2: 860,
-      q3: 515,
-      q4: 1009,
-      q5: 1258,
+      f20: 852,
+      f21: 860,
+      f22: 515,
+      f23: 1009,
+      f24: 1258,
     },
     {
       name: 'Scope 2: Electricity Consumption',
-      q1: 7024,
-      q2: 7882,
-      q3: 7933,
-      q4: 9359,
-      q5: 7888
+      f20: 7024,
+      f21: 7882,
+      f22: 7933,
+      f23: 9359,
+      f24: 7888
     },
     {
       name: 'Scope 3: Indirect Emissions',
-      q1: 3885,
-      q2: 4861,
-      q3: 6014,
-      q4: 12013,
-      q5: 5676,
+      f20: 3885,
+      f21: 4861,
+      f22: 6014,
+      f23: 12013,
+      f24: 5676,
     },
     {
       name: 'Total GHG Emission',
-      q1: 11760,
-      q2: 13604,
-      q3: 14462,
-      q4: 22382,
-      q5: 14812
+      f20: 11760,
+      f21: 13604,
+      f22: 14462,
+      f23: 22382,
+      f24: 14812
     }
   ];
 
   const monthlyData = [
     {
       name: 'SND',
-      current: 2472,
-      previous: 3454,
-      variance: 4383,
-      ytd: 9620,
-      uo:4403,
+      f20: 2472,
+      f21: 3454,
+      f22: 4383,
+      f23: 9620,
+      f24:4403,
     },
     {
       name: 'BIA',
-      current: 5493,
-      previous: 5920,
-      variance: 5125,
-      ytd: 7373,
-      uo:6431,
+      f20: 5493,
+      f21: 5920,
+      f22: 5125,
+      f23: 7373,
+      f24:6431,
     },
     {
       name: 'SLN',
-      current: 1449,
-      previous: 1427,
-      variance: 682,
-      ytd: 1385,
-      uo:708,
+      f20: 1449,
+      f21: 1427,
+      f22: 682,
+      f23: 1385,
+      f24:708,
     },
     {
       name: 'Bristrol',
-      current: 286,
-      previous: 321,
-      variance: 255,
-      ytd: 228,
-      uo:114,
+      f20: 286,
+      f21: 321,
+      f22: 255,
+      f23: 228,
+      f24:114,
     },
     {
       name: 'Itlay',
-      current: 0,
-      previous: 0,
-      variance: 0,
-      ytd:  0,
-      uo:0,
+      f20: 0,
+      f21: 0,
+      f22: 0,
+      f23: 0,
+      f24:0,
     }
   ];
 
   const targetData = [
     {
       name: 'Australia',
-      target: 136,
-      actual: 1750.25,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 136,
+      f21: 58,
+      f22: 65,
+      f23: 60,
+      f24: 46
     },
     {
       name: 'Sweden',
-      target: 997.74,
-      actual: 1050.25,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 9,
+      f21: 4,
+      f22: 2,
+      f23: 2,
+      f24: 1
     },
     {
       name: 'Chandlers Ford',
-      target: 2232.74,
-      actual: 2350.25,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 87,
+      f21: 137,
+      f22: 312,
+      f23: 179,
+      f24: 128
     },
     {
       name: 'Zurich',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 31,
+      f21: 2,
+      f22: 0,
+      f23: 1,
+      f24: 0
     },
     {
       name: 'UAE',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 22,
+      f21: 15,
+      f22: 11,
+      f23: 13,
+      f24: 9
     },
     {
       name: 'PIA',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 1159,
+      f21: 1208,
+      f22: 1179,
+      f23: 1324,
+      f24: 1199
     },
     {
       name: 'MIA',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 119,
+      f21: 134,
+      f22: 130,
+      f23: 136,
+      f24: 0
     },
     {
       name: 'RO Gurgaon',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 201,
+      f21: 226,
+      f22: 214,
+      f23: 230,
+      f24: 169
     },
     {
       name: 'RO Mumbai',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 11,
+      f21: 16,
+      f22: 20,
+      f23: 37,
+      f24: 36
     },
     {
       name: 'RO Kolkata',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 66,
+      f21: 78,
+      f22: 53,
+      f23: 57,
+      f24: 47
     },
     {
       name: 'RO Bengaluru',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 32,
+      f21: 40,
+      f22: 39,
+      f23: 41,
+      f24: 28
     },
     {
       name: 'SESL Gurgaon',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 42,
+      f21: 50,
+      f22: 46,
+      f23: 47,
+      f24: 47
     },
     {
       name: 'SESL Kolkata',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 67,
+      f21: 139,
+      f22: 76,
+      f23: 88,
+      f24: 100
     },
     {
       name: 'SESL Mumbai',
-      target: 4893.21,
-      actual: 5150.75,
-      variance: 5.0,
-      hi: 30,
-      no: 60
+      f20: 0,
+      f21: 0,
+      f22: 3,
+      f23: 3,
+      f24: 18
     }
   ];
 
@@ -449,27 +449,34 @@ const pieChartTables = ["Scope Wise GHG Emissions"];
       </Slider>
     )}
 
+    
     {/* Slider for Bar Charts */}
     {!pieChartTables.includes(table.title) && (
-      <Slider {...settings}>
-      {quarterlyData.map((row, index) => {
-        const graphData = Object.keys(row)
-          .filter((key) => key !== "name")
-          .map((key) => ({
-            name: key.toUpperCase(), // X-axis labels (q1, q2, q3, q4, q5)
-            value: row[key], // Y-axis values
-          }));
-    
-        return (
-          <div key={index}>
-            <h3 className="text-lg font-bold text-center mb-4">{row.name}</h3>
-            <Graph data={graphData} type="bar" />
-          </div>
-        );
-      })}
-    </Slider>
-    
-    )}
+  <Slider {...settings}>
+    {(table.title === "Scope Wise GHG Emissions(tCo2e)"
+      ? quarterlyData
+      : table.title === "GHG Emissions"
+      ? monthlyData
+      : targetData // Default to targetData for other titles
+    ).map((row, index) => {
+      // Format data for the bar graph
+      const graphData = Object.keys(row)
+        .filter((key) => key !== "name") // Exclude the "name" column
+        .map((key) => ({
+          name: key.toUpperCase(), // X-axis labels (e.g., Q1, CURRENT, TARGET)
+          value: row[key], // Y-axis values
+        }));
+
+      return (
+        <div key={index}>
+          <h3 className="text-lg font-bold text-center mb-4">{row.name}</h3>
+          <Graph data={graphData} type="bar" />
+        </div>
+      );
+    })}
+  </Slider>
+)}
+
 
 
           

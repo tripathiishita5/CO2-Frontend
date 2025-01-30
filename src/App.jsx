@@ -4,7 +4,8 @@ import Login from './Pages/Login.jsx';
 import UserAccess from './Pages/UserAccess.jsx';
 import Dashboard from './Pages/Dashboard/Table.jsx';
 import Input from './Pages/Input.jsx'
- 
+import ActivityScope from './Pages/ActivityScope.jsx';
+
 function App() {
   return (
     <Router>
@@ -14,15 +15,15 @@ function App() {
         <Route path="/dashboard" element={<Layout showNavbar={true}><Dashboard /></Layout>} /> {/* Dashboard with Navbar */}
         <Route path="/input-form" element={<Layout showNavbar={true}><Input /></Layout>} /> {/* Dashboard with Navbar */}
         <Route path="/user-rights" element={<Layout showNavbar={true}><UserAccess /></Layout>} /> {/* User access page with Navbar */}
-        <Route path="/user-scope" element={<Layout showNavbar={true}><Dashboard /></Layout>} /> {/* Dashboard with Navbar */}
-         
-            
- 
+        <Route path="/activity-scope" element={<Layout showNavbar={true}><ActivityScope /></Layout>} /> {/* Dashboard with Navbar */}
+
+
+
       </Routes>
-      
+
     </Router>
   );
 }
- 
+
 export default App;
- 
+

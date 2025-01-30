@@ -1,5 +1,5 @@
 import React from "react";
- 
+
 const Navbar = () => {
   return (
     <>
@@ -13,7 +13,7 @@ const Navbar = () => {
               className="h-12"
             />
           </div>
- 
+
           {/* Toggler for responsive navbar */}
           <button
             className="md:hidden flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:border-white"
@@ -39,7 +39,7 @@ const Navbar = () => {
               ></path>
             </svg>
           </button>
- 
+
           {/* Navbar Links */}
           <div
             className="hidden md:flex md:items-center md:space-x-8"
@@ -49,7 +49,7 @@ const Navbar = () => {
               href="/"
               className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md"
             >
- 
+
             </a>
             <a
               href="/dashboard"
@@ -71,7 +71,7 @@ const Navbar = () => {
             </a>
             <a
               href="/activity-scope"
-              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 pr-20 py-2 transition-all duration-300 rounded-md"
+              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 mr-30 py-2 transition-all duration-300 rounded-md"
             >
               Activity Data
             </a>
@@ -81,6 +81,6 @@ const Navbar = () => {
     </>
   );
 };
- 
+
 export default Navbar;
- 
+

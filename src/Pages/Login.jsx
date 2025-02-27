@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { User, Lock, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../http/api.js'
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate(); // Initialize navigate
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,26 +16,13 @@ function Login() {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    user_id: username,
-                    password: password
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Login failed');
+            const data = {
+                user_id: username,
+                password: password
             }
+            const response = await login(data);
 
-            const data = await response.json();
-            console.log('Login successful:', data);
-            // Handle successful login here (e.g., store token, redirect, etc.)
-             // Redirect to Table page after successful login
-             navigate('/dashboard');
+            navigate('/dashboard');
 
         } catch (err) {
             setError('Login failed. Please check your credentials and try again.');

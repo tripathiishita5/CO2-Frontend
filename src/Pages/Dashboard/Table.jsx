@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Graph from "./Graph";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 
 
 const GHGEmissionsTables = () => {
+  const [activeTable, setActiveTable] = useState(0);
   const annualData = [
     {
       name: 'Scope 1: Direct Emissions',
@@ -22,7 +24,7 @@ const GHGEmissionsTables = () => {
       fy2021: 7882,
       fy2022: 7933,
       fy2023: 9359,
-      fy2024:7888
+      fy2024: 7888
     },
     {
       name: 'Scope 3: Indirect Emissions',
@@ -30,7 +32,7 @@ const GHGEmissionsTables = () => {
       fy2021: 4861,
       fy2022: 6015,
       fy2023: 12013,
-      fy2024:5676
+      fy2024: 5676
     },
     {
       name: 'Total GHG Emission',
@@ -38,7 +40,7 @@ const GHGEmissionsTables = () => {
       fy2021: 13604,
       fy2022: 14462,
       fy2023: 22382,
-      fy2024:14821
+      fy2024: 14821
     },
     {
       name: 'Emission Intensity',
@@ -46,7 +48,7 @@ const GHGEmissionsTables = () => {
       fy2021: 0.00424,
       fy2022: 0.00560,
       fy2023: 0.00661,
-      fy2024:0.00720
+      fy2024: 0.00720
     },
     {
       name: 'Emission Intensity in kgCO2 eg',
@@ -54,7 +56,7 @@ const GHGEmissionsTables = () => {
       fy2021: 4.24,
       fy2022: 5.60,
       fy2023: 6.61,
-      fy2024:7.20
+      fy2024: 7.20
     }
   ];
 
@@ -100,7 +102,7 @@ const GHGEmissionsTables = () => {
       f21: 3454,
       f22: 4383,
       f23: 9620,
-      f24:4403,
+      f24: 4403,
     },
     {
       name: 'BIA',
@@ -108,7 +110,7 @@ const GHGEmissionsTables = () => {
       f21: 5920,
       f22: 5125,
       f23: 7373,
-      f24:6431,
+      f24: 6431,
     },
     {
       name: 'SLN',
@@ -116,7 +118,7 @@ const GHGEmissionsTables = () => {
       f21: 1427,
       f22: 682,
       f23: 1385,
-      f24:708,
+      f24: 708,
     },
     {
       name: 'Bristrol',
@@ -124,7 +126,7 @@ const GHGEmissionsTables = () => {
       f21: 321,
       f22: 255,
       f23: 228,
-      f24:114,
+      f24: 114,
     },
     {
       name: 'Itlay',
@@ -132,7 +134,7 @@ const GHGEmissionsTables = () => {
       f21: 0,
       f22: 0,
       f23: 0,
-      f24:0,
+      f24: 0,
     }
   ];
 
@@ -255,235 +257,164 @@ const GHGEmissionsTables = () => {
     {
       title: 'Scope Wise GHG Emissions',
       data: annualData,
-      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25'],
     },
     {
-      title: 'Scope Wise GHG Emissions(tCo2e)', 
+      title: 'Scope Wise GHG Emissions(tCo2e)',
       data: quarterlyData,
-      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25'],
     },
     {
-      title: 'GHG Emissions', 
+      title: 'GHG Emissions',
       data: monthlyData,
-      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25'],
     },
     {
       title: 'GHG Emissions(tCo2e)',
       data: targetData,
-      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25' ],
+      columns: ['Emission Source', 'FY2020-21', 'FY2021-22', 'FY2022-23', 'FY2023-24', 'FY2024-25'],
     }
   ];
   // Custom Next Arrow
-const CustomNextArrow = ({ className, style, onClick }) => (
-  <div
-    className={className}
-    style={{
-      ...style,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      marginRight: "45px",
-      background: "none",
-    }}
-    onClick={onClick}
-  >
-    {/* PNG for Next Arrow */}
-    <img
-      src="src\Images\nextarrow.png" // Replace with the path to your PNG file
-      alt="Next"
-      style={{
-        width: "15px",
-        height: "15px",
-      }}
-    />
-  </div>
-);
+  const CustomNextArrow = ({ className, onClick }) => (
+    <div
+      className={`${className} !flex !items-center !justify-center !w-10 !h-10 !bg-white !rounded-full !shadow-lg !z-10 !right-2`}
+      onClick={onClick}
+    >
+      <ChevronRight className="w-6 h-6 text-[#830c59]" />
+    </div>
+  );
 
-// Custom Prev Arrow
-const CustomPrevArrow = ({ className, style, onClick }) => (
-  <div
-    className={className}
-    style={{
-      ...style,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      marginLeft: "30px",
-      zIndex: 1,
-      background: "white",
-    }}
-    onClick={onClick}
-  >
-    {/* PNG for Prev Arrow */}
-    <img
-      src="src\Images\prevarrow.png" // Replace with the path to your PNG file
-      alt="Previous"
-      style={{
-        width: "17px",
-        height: "17px",
-      }}
-    />
-  </div>
-);
-
+  const CustomPrevArrow = ({ className, onClick }) => (
+    <div
+      className={`${className} !flex !items-center !justify-center !w-10 !h-10 !bg-white !rounded-full !shadow-lg !z-10 !left-2`}
+      onClick={onClick}
+    >
+      <ChevronLeft className="w-6 h-6 text-[#830c59]" />
+    </div>
+  );
 
   const years = ["fy2020", "fy2021", "fy2022", "fy2023", "fy2024"];
-// Carousel settings
-const settings = {
-  dots: true,
+
+  const settings = {
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,  
+    autoplaySpeed: 3000,
     pauseOnHover: true,
     nextArrow: <CustomNextArrow />,
-  prevArrow: <CustomPrevArrow />
-};
-const pieChartTables = ["Scope Wise GHG Emissions"];
+    prevArrow: <CustomPrevArrow />,
+    dotsClass: "slick-dots !bottom-[-12px]"
+  };
 
+  const pieChartTables = ["Scope Wise GHG Emissions"];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      {tables.map((table, index) => (
-        <div key={index} className="min-h-screen flex flex-col justify-center px-4 py-8">
-          <div className="max-w-8xl mx-auto w-full flex gap-6">
-            <div className="w-3/4 bg-white rounded-xl shadow-xl overflow-hidden">
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-[#830c59] mb-2">{table.title}</h2>
-                <p className="text-gray-600 mb-6">{table.description}</p>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="bg-[#830c59]">
-                        {table.columns.map((column, i) => (
-                          <th key={i} className="px-6 py-4 text-left text-white font-semibold">
-                            {column}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {table.data.map((row, i) => (
-                        <tr key={i} className="border-b border-gray-200 hover:bg-gray-50">
-                          <td className="px-6 py-4 font-medium">{row.name}</td>
-                          {/* {Object.keys(row).filter(key => key !== 'name').map((key, j) => (
-                            <td key={j} className="px-6 py-4 text-right">
-                              {typeof row[key] === 'number' ? row[key].toFixed(2) : row[key]}
-                            </td>
-                          ))} */}
-                          {Object.keys(row).filter(key => key !== 'name').map((key, j) => (
-  <td key={j} className="px-6 py-4 text-right">
-    {typeof row[key] === 'number' ? row[key] : row[key]}
-  </td>
-))}
-
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            
-            <div className="w-1/4 bg-white rounded-xl shadow-xl ">
-            <h2 className="text-xl font-semibold mb-4 mt-4 text-center text-[#830c59]">
-              Graphs
-            </h2>
-             
-
-{/* <Slider {...settings}>
-  {years.map((year, index) => {
-    const graphData =
-      table.title === "Scope Wise GHG Emissions"
-        ? table.data
-            .filter((item) =>
-              ["Scope 1: Direct Emissions", "Scope 2: Electricity Consumption", "Scope 3: Indirect Emissions"].includes(item.name)
-            )
-            .map((item) => ({
-              name: item.name.split(":")[0], // Extracting scope name
-              value: item[year],
-            }))
-        : table.data.map((item) => ({
-            name: item.name.split(":")[0], // Extracting scope name
-            value: item[year],
-          }));
-
-    // Determine the graph type based on the table title
-    const graphType =
-      table.title === "Scope Wise GHG Emissions"
-        ? "pie"
-        : "bar";
-
-    return (
-      <div key={index}>
-        <h3 className="text-lg font-bold text-center mb-4">
-          {year.toUpperCase()}
-        </h3>
-        <Graph data={graphData} type={graphType} />
-      </div>
-    );
-  })}
-</Slider> */}
-{/* Slider for Pie Charts */}
-{pieChartTables.includes(table.title) && (
-      <Slider {...settings}>
-        {years.map((year, index) => {
-          const graphData = table.data
-            .filter((item) =>
-              ["Scope 1: Direct Emissions", "Scope 2: Electricity Consumption", "Scope 3: Indirect Emissions"].includes(item.name)
-            )
-            .map((item) => ({
-              name: item.name.split(":")[0], // Extracting scope name
-              value: item[year],
-            }));
-
-          return (
-            <div key={index}>
-              <h3 className="text-lg font-bold text-center mb-4">{year.toUpperCase()}</h3>
-              <Graph data={graphData} type="pie" />
-            </div>
-          );
-        })}
-      </Slider>
-    )}
-
-    
-    {/* Slider for Bar Charts */}
-    {!pieChartTables.includes(table.title) && (
-  <Slider {...settings}>
-    {(table.title === "Scope Wise GHG Emissions(tCo2e)"
-      ? quarterlyData
-      : table.title === "GHG Emissions"
-      ? monthlyData
-      : targetData // Default to targetData for other titles
-    ).map((row, index) => {
-      // Format data for the bar graph
-      const graphData = Object.keys(row)
-        .filter((key) => key !== "name") // Exclude the "name" column
-        .map((key) => ({
-          name: key.toUpperCase(), // X-axis labels (e.g., Q1, CURRENT, TARGET)
-          value: row[key], // Y-axis values
-        }));
-
-      return (
-        <div key={index}>
-          <h3 className="text-lg font-bold text-center mb-4">{row.name}</h3>
-          <Graph data={graphData} type="bar" />
+    <div className="bg-gray-50 min-h-screen p-6">
+      <div className="max-w-[1600px] mx-auto">
+        <div className="mb-6 flex gap-4 overflow-x-auto py-2">
+          {tables.map((table, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveTable(idx)}
+              className={`px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all ${activeTable === idx
+                ? 'bg-[#830c59] text-white shadow-lg'
+                : 'bg-white text-[#830c59] hover:bg-[#830c59]/10'
+                }`}
+            >
+              {table.title}
+            </button>
+          ))}
         </div>
-      );
-    })}
-  </Slider>
-)}
 
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Graphs Section */}
+          <div className="lg:col-span-2 bg-white rounded-xl shadow-xl p-6">
+            <h2 className="text-2xl font-bold text-[#830c59] mb-6">Visualization</h2>
+            <div className="h-[500px]">
+              {pieChartTables.includes(tables[activeTable].title) ? (
+                <Slider {...settings}>
+                  {years.map((year, index) => {
+                    const graphData = tables[activeTable].data
+                      .filter((item) =>
+                        ["Scope 1: Direct Emissions", "Scope 2: Electricity Consumption", "Scope 3: Indirect Emissions"].includes(item.name)
+                      )
+                      .map((item) => ({
+                        name: item.name.split(":")[0],
+                        value: item[year],
+                      }));
 
+                    return (
+                      <div key={index} className="px-4">
+                        <h3 className="text-lg font-bold text-center mb-4">{year.toUpperCase()}</h3>
+                        <Graph data={graphData} type="pie" />
+                      </div>
+                    );
+                  })}
+                </Slider>
+              ) : (
+                <Slider {...settings}>
+                  {(activeTable === 1
+                    ? quarterlyData
+                    : activeTable === 2
+                      ? monthlyData
+                      : targetData
+                  ).map((row, index) => {
+                    const graphData = Object.keys(row)
+                      .filter((key) => key !== "name")
+                      .map((key) => ({
+                        name: key.toUpperCase(),
+                        value: row[key],
+                      }));
 
-          
+                    return (
+                      <div key={index} className="px-4">
+                        <h3 className="text-lg font-bold text-center mb-4">{row.name}</h3>
+                        <Graph data={graphData} type="bar" />
+                      </div>
+                    );
+                  })}
+                </Slider>
+              )}
+            </div>
+          </div>
+
+          {/* Table Section */}
+          <div className="lg:col-span-1 bg-white rounded-xl shadow-xl p-6">
+            <h2 className="text-2xl font-bold text-[#830c59] mb-6">{tables[activeTable].title}</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="bg-[#830c59]">
+                    {tables[activeTable].columns.map((column, i) => (
+                      <th key={i} className="px-4 py-3 text-left text-white font-semibold">
+                        {column}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tables[activeTable].data.map((row, i) => (
+                    <tr key={i} className="border-b border-gray-200 hover:bg-gray-50">
+                      <td className="px-4 py-3 font-medium">{row.name}</td>
+                      {Object.keys(row)
+                        .filter(key => key !== 'name')
+                        .map((key, j) => (
+                          <td key={j} className="px-4 py-3 text-right">
+                            {typeof row[key] === 'number' ? row[key].toLocaleString() : row[key]}
+                          </td>
+                        ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

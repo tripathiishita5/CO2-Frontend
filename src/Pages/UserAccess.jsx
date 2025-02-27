@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { User, Lock, Calendar, MapPin, Settings, Clock } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { register } from "../http/api";
+// import { register } from "../http/authService";
 
 function UserAccess() {
     const [formType, setFormType] = useState('admin');

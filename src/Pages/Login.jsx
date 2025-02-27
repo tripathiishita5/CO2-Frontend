@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { User, Lock, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../http/api.js'
+import { login } from '../http/authService'
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -21,7 +21,7 @@ function Login() {
                 password: password
             }
             const response = await login(data);
-
+            console.log(response);
             navigate('/dashboard');
 
         } catch (err) {

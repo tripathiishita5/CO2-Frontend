@@ -1,29 +1,84 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './Components/Layout/Layout.jsx';
-import Login from './Pages/Login.jsx';
-import UserAccess from './Pages/UserAccess.jsx';
-import Dashboard from './Pages/Dashboard/Table.jsx';
-import Input from './Pages/Input.jsx'
-import ActivityScope from './Pages/ActivityScope.jsx';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Login from "./Pages/Login";
+import UserAccess from "./Pages/UserAccess";
+import Dashboard from "./Pages/Dashboard/Table";
+import Input from "./Pages/Input";
+import ActivityScope from "./Pages/ActivityScope";
+import Unauthorized from "./Pages/Unauthorized";
+import Navbar from "./Components/Navbar";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import LoadingScreen from "./Components/LoadingScreen";
+import { RoleProvider } from "./contexts/RoleContext";
+import { LoadingProvider, useLoading } from "./Contexts/LoadingContext";
+import { useEffect } from "react";
+import { setupInterceptors } from "./http/apiClient";
+
 
 function App() {
   return (
+    <RoleProvider>
+      <LoadingProvider>
+        <AppContent />
+      </LoadingProvider>
+    </RoleProvider>
+  );
+}
+
+function AppContent() {
+  const { setLoading } = useLoading();
+
+  useEffect(() => {
+    setupInterceptors(setLoading); // Set up Axios interceptors
+  }, []);
+
+  return (
     <Router>
+      <LoadingScreen />
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Layout showNavbar={false}><Login /></Layout>} /> Login page without Navbar
-        {/* <Route path="/login" element={<Layout showNavbar={false}><Login /></Layout>} /> Login page without Navbar */}
-        <Route path="/dashboard" element={<Layout showNavbar={true}><Dashboard /></Layout>} /> {/* Dashboard with Navbar */}
-        <Route path="/input-form" element={<Layout showNavbar={true}><Input /></Layout>} /> {/* Dashboard with Navbar */}
-        <Route path="/user-rights" element={<Layout showNavbar={true}><UserAccess /></Layout>} /> {/* User access page with Navbar */}
-        <Route path="/activity-scope" element={<Layout showNavbar={true}><ActivityScope /></Layout>} /> {/* Dashboard with Navbar */}
-
-
-
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["USER", "MANAGER", "ADMIN"]}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/input-form"
+          element={
+            <ProtectedRoute allowedRoles={["USER", "MANAGER", "ADMIN"]}>
+              <Input />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user-rights"
+          element={
+            <ProtectedRoute allowedRoles={["MANAGER", "ADMIN"]}>
+              <UserAccess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/activity-scope"
+          element={
+            <ProtectedRoute>
+              <ActivityScope />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-
     </Router>
   );
 }
 
 export default App;
-

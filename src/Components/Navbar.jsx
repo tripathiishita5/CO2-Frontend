@@ -1,86 +1,79 @@
+import { LogOut } from "lucide-react";
 import React from "react";
+import { logout } from "../http/authService";
+import { useLocation } from "react-router-dom";
+import { useRole } from "../contexts/RoleContext";
 
 const Navbar = () => {
+  const { role, loading } = useRole();
+  const location = useLocation();
+
+  async function handleLogout() {
+    try {
+      const response = await logout();
+      console.log(response);
+      
+      if (response.result === true) { 
+        window.location.href = "/";
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
+
+  // Hide navbar on login page
+  if (location.pathname === "/" || location.pathname === "/login" || !role) {
+    return null;
+  }
+
+  // Show loading until role is determined
+  if (loading) {
+    return null;
+  }
+
   return (
-    <>
-      <nav className="bg-white">
-        <div className="mx-auto flex items-center justify-between">
-          {/* Logo Section */}
-          <div className="p-4 pt-2">
-            <img
-              src="https://www.metermarket.co.uk/assets/manufacturers/_manufacturerTile2x/logo_secure.png"
-              alt="Secure Meter Logo"
-              className="h-12"
-            />
-          </div>
+    <nav className="bg-white shadow-md">
+      <div className="mx-auto flex items-center justify-between pr-8 py-2">
+        {/* Logo Section */}
+        <div className="p-4">
+          <img
+            src="https://www.metermarket.co.uk/assets/manufacturers/_manufacturerTile2x/logo_secure.png"
+            alt="Secure Meter Logo"
+            className="h-12"
+          />
+        </div>
 
-          {/* Toggler for responsive navbar */}
-          <button
-            className="md:hidden flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:border-white"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <svg
-              className="h-3 w-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4s 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
-          </button>
+        {/* Navbar Links */}
+        <div className="hidden md:flex md:items-center md:space-x-8" id="navbarNav">
+          <a href="/dashboard" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
+            Dashboard
+          </a>
 
-          {/* Navbar Links */}
-          <div
-            className="hidden md:flex md:items-center md:space-x-8"
-            id="navbarNav"
-          >
-            <a
-              href="/"
-              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md"
-            >
+          <a href="/input-form" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
+            Input Form
+          </a>
 
-            </a>
-            <a
-              href="/dashboard"
-              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md"
-            >
-              Dashboard
-            </a>
-            <a
-              href="/input-form"
-              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md"
-            >
-              Input Form
-            </a>
-            <a
-              href="/user-rights"
-              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md"
-            >
+          {/* Show "User Rights" only for MANAGER or ADMIN */}
+          {role == "ADMIN" && (
+            <a href="/user-rights" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
               User Rights
             </a>
-            <a
-              href="/activity-scope"
-              className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 mr-30 py-2 transition-all duration-300 rounded-md"
-            >
+          )}
+
+          {/* Show "Activity Scope" only for MANAGER or ADMIN */}
+          {["MANAGER", "ADMIN"].includes(role) && (
+            <a href="/activity-scope" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
               Activity Data
             </a>
-          </div>
+          )}
+
+          <button onClick={handleLogout} title="Logout" className="cursor-pointer p-2 hover:bg-[#F3E5F5] rounded-md">
+            <LogOut color="#820C59" />
+          </button>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 };
 
 export default Navbar;
-

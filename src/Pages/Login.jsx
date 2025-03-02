@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { User, Lock, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../http/authService'
+import { useRole } from '../contexts/RoleContext';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -9,28 +10,43 @@ function Login() {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const { fetchRole,role } = useRole(); // Get fetchRole function
+
+    useEffect(() => {
+        if (role) {
+          navigate("/dashboard"); // Redirect if already logged in
+        }
+      }, [role, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
-
+    
         try {
             const data = {
                 user_id: username,
                 password: password
-            }
-            const response = await login(data);
-            console.log(response);
-            navigate('/dashboard');
+            };
+            
+            const response = await login(data); // Await API call
 
+            await fetchRole();
+    
+            // Check if login was successful before navigating
+            if (response?.result === true) {
+                navigate('/dashboard');
+            } else {
+                setError(response.msg);
+            }
+    
         } catch (err) {
-            setError('Login failed. Please check your credentials and try again.');
-            console.error('Login error:', err);
+            setError(err.response.data.msg);
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex flex-col">

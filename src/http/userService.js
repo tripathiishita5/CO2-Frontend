@@ -7,11 +7,11 @@ import API_ENDPOINTS from "./apiEndpoints";
 //     return response.data;
 // };
 
-// // Create new user
-// export const createUser = async (userData) => {
-//     const response = await apiClient.post(API_ENDPOINTS.USERS.CREATE, userData);
-//     return response.data;
-// };
+// Create new user
+export const createUser = async (userData) => {
+    const response = await apiClient.post(API_ENDPOINTS.USERS.CREATE, userData);
+    return response.data;
+};
 
 // // Update user
 // export const updateUser = async (id, userData) => {

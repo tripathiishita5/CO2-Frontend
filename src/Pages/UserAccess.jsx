@@ -278,7 +278,7 @@ function UserAccess() {
                   type="submit"
                   className="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#820C59] hover:bg-[#722156] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
                 >
-                  Register User
+                  Save User Data
                 </button>
               </form>
             ) : (

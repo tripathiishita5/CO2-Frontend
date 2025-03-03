@@ -1,37 +1,38 @@
 import axios from "axios";
-import API_ENDPOINTS from "./apiEndpoints";
 
-const API_BASE_URL = "https://localhost:44310/api/"
+const API_BASE_URL = "https://localhost:44310/api/";
 // Create an Axios instance
 const apiClient = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        "Content-Type": "application/json",
-    },
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
 });
 
-// Add a request interceptor (e.g., for adding auth tokens)
-apiClient.interceptors.request.use(
+// Handle request interception
+export const setupInterceptors = (setLoading) => {
+  apiClient.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("CO2Auth"); // Get JWT token from storage
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
+      setLoading(true); // Start loading before request
+      return config;
     },
-    (error) => Promise.reject(error)
-);
-
-// Add a response interceptor (e.g., for handling errors globally)
-apiClient.interceptors.response.use(
-    (response) => response,
     (error) => {
-        if (error.response && error.response.status === 401) {
-            console.error("Unauthorized! Redirecting to login...");
-            // Handle token expiration (logout, redirect, etc.)
-        }
-        return Promise.reject(error);
+      setLoading(false); // Stop loading on error
+      return Promise.reject(error);
     }
-);
+  );
+
+  apiClient.interceptors.response.use(
+    (response) => {
+      setLoading(false); // Stop loading after response
+      return response;
+    },
+    (error) => {
+      setLoading(false); // Stop loading on error
+      return Promise.reject(error);
+    }
+  );
+};
 
 export default apiClient;

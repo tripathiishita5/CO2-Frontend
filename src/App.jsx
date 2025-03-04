@@ -10,6 +10,7 @@ import Dashboard from "./Pages/Dashboard/Table";
 import Input from "./Pages/Input";
 import ActivityScope from "./Pages/ActivityScope";
 import Unauthorized from "./Pages/Unauthorized";
+import EmissionFactors from "./Pages/EmissionFactors";
 import Navbar from "./Components/Navbar";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import LoadingScreen from "./Components/LoadingScreen";
@@ -61,7 +62,7 @@ function AppContent() {
         <Route
           path="/user-rights"
           element={
-            <ProtectedRoute allowedRoles={["MANAGER", "ADMIN"]}>
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
               <UserAccess />
             </ProtectedRoute>
           }
@@ -69,8 +70,16 @@ function AppContent() {
         <Route
           path="/activity-scope"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={["MANAGER", "ADMIN"]}>
               <ActivityScope />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/emission-factors"
+          element={
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
+              <EmissionFactors />
             </ProtectedRoute>
           }
         />

@@ -12,7 +12,7 @@ const LoadingScreen = () => {
         <div className="h-16 w-16 border-4 border-t-[#820C59] border-gray-300 rounded-full animate-spin"></div>
 
         {/* Loading Text */}
-        <p className="mt-4 text-black text-lg font-semibold">Loading...</p>
+        <p className="mt-4 text-[#820C59] text-lg font-semibold">Loading...</p>
       </div>
     </div>
   );

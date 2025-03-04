@@ -8,8 +8,9 @@ const API_ENDPOINTS = {
         CREATE_UPDATE: "/User/register",
         GET_ROLE: "/User/getUserRole"
     },
-    REF:{
-        GET_REF_DATA: (type) => `/Ref/getRefData?type=${type}`
+    REF: {
+        GET_REF_DATA: (type) => `/Ref/getRefData?type=${type}`,
+        GET_EMISSION_FACTORS: "Test/get_emission_factors"
     }
 };
 

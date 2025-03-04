@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { User, Calendar, MapPin, Settings } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";

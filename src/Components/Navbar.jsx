@@ -12,8 +12,8 @@ const Navbar = () => {
     try {
       const response = await logout();
       console.log(response);
-      
-      if (response.result === true) { 
+
+      if (response.result === true) {
         window.location.href = "/";
       }
     } catch (error) {
@@ -53,7 +53,7 @@ const Navbar = () => {
             Input Form
           </a>
 
-          {/* Show "User Rights" only for MANAGER or ADMIN */}
+          {/* Show "User Rights" only for ADMIN */}
           {role == "ADMIN" && (
             <a href="/user-rights" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
               User Rights
@@ -64,6 +64,13 @@ const Navbar = () => {
           {["MANAGER", "ADMIN"].includes(role) && (
             <a href="/activity-scope" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
               Activity Data
+            </a>
+          )}
+
+          {/* Show "Emission Factors" only for ADMIN */}
+          {role == "ADMIN" && (
+            <a href="/emission-factors" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
+              Emission Factors
             </a>
           )}
 

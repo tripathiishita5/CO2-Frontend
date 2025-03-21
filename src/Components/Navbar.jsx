@@ -44,7 +44,7 @@ const Navbar = () => {
         </div>
 
         {/* Navbar Links */}
-        <div className="hidden md:flex md:items-center md:space-x-8" id="navbarNav">
+        <div className="hidden md:flex md:items-center md:space-x-6" id="navbarNav">
           <a href="/dashboard" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
             Dashboard
           </a>
@@ -57,6 +57,13 @@ const Navbar = () => {
           {role == "ADMIN" && (
             <a href="/user-rights" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
               User Rights
+            </a>
+          )}
+
+          {/* Show "Business Travel" only for ADMIN */}
+          {role == "ADMIN" && (
+            <a href="/business-travel" className="text-[#820C59] hover:bg-[#F3E5F5] hover:text-[#6F1747] px-3 py-2 transition-all duration-300 rounded-md">
+              Business Travel
             </a>
           )}
 

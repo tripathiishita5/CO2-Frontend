@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp, Save, AlertCircle } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getRefData } from "../http/refService";
+
 function Input() {
   const [formState, setFormState] = useState({
     // Mandatory fields
@@ -123,15 +124,15 @@ function Input() {
     try {
       const data = await getRefData("formFields"); // Call API function
       if (data.length > 0) {
-        var scope1 = [],scope2 = [],scope3 = [];
-        data.forEach((row)=>{
-            if(row.scope == 1){
-                scope1.push(row.text);
-            }else if(row.scope == 2){
-                scope2.push(row.text);
-            }else if(row.scope == 3){
-                scope3.push(row.text);
-            }
+        var scope1 = [], scope2 = [], scope3 = [];
+        data.forEach((row) => {
+          if (row.scope == 1) {
+            scope1.push(row.text);
+          } else if (row.scope == 2) {
+            scope2.push(row.text);
+          } else if (row.scope == 3) {
+            scope3.push(row.text);
+          }
         })
         setScopeData((prevState) => ({
           ...prevState,
@@ -153,105 +154,6 @@ function Input() {
     const fetchInputData = async () => {
       if (formState.ac_year && formState.month && formState.location) {
         fetchFormFields();
-        // try {
-        //   const response = await fetch(
-        //     `http://localhost:5000/api/auth/get-input-data/${formState.ac_year}/${formState.month}/${formState.location}/${formState.user_id}`
-        //   );
-        //   const data = await response.json();
-
-        //   if (data && data.length > 0) {
-        //     // Update form values with the fetched data
-        //     setFormValues((prev) => ({
-        //       ...prev,
-        //       ...data[0],
-        //     }));
-        //   } else {
-        //     // Reset all form values to empty strings if no data exists
-        //     setFormValues({
-        //       // Scope 1
-        //       diesel_dg_set: "",
-        //       diesel_others: "",
-        //       petrol: "",
-        //       lpg_process: "",
-        //       r22: "",
-        //       r134a: "",
-        //       r410: "",
-        //       r401: "",
-        //       r32: "",
-        //       co2: "",
-        //       grid: "",
-
-        //       // Scope 2
-        //       renewable_energy: "",
-        //       steam: "",
-        //       elec_consumption_grid: "",
-        //       t_and_d_losses: "",
-
-        //       // Scope 3
-        //       lpg_canteen: "",
-        //       rmt_road: "",
-        //       rmt_rail: "",
-        //       rmt_ship: "",
-        //       rmt_air: "",
-        //       tow_road: "",
-        //       bt_air: "",
-        //       bt_rail: "",
-        //       bt_bus: "",
-        //       bt_car: "",
-        //       ec_bus: "",
-        //       ec_bike: "",
-        //       ec_car: "",
-        //       ec_train: "",
-        //       fpd_road: "",
-        //       fpd_rail: "",
-        //       fpd_ship: "",
-        //       fpd_air: "",
-        //     });
-        //   }
-        // } catch (error) {
-        //   console.error("Error fetching input data:", error);
-        //   // Reset form values on error as well
-        //   setFormValues({
-        //     // Scope 1
-        //     diesel_dg_set: "",
-        //     diesel_others: "",
-        //     petrol: "",
-        //     lpg_process: "",
-        //     r22: "",
-        //     r134a: "",
-        //     r410: "",
-        //     r401: "",
-        //     r32: "",
-        //     co2: "",
-        //     grid: "",
-
-        //     // Scope 2
-        //     renewable_energy: "",
-        //     steam: "",
-        //     elec_consumption_grid: "",
-        //     t_and_d_losses: "",
-
-        //     // Scope 3
-        //     lpg_canteen: "",
-        //     rmt_road: "",
-        //     rmt_rail: "",
-        //     rmt_ship: "",
-        //     rmt_air: "",
-        //     tow_road: "",
-        //     bt_air: "",
-        //     bt_rail: "",
-        //     bt_bus: "",
-        //     bt_car: "",
-        //     ec_bus: "",
-        //     ec_bike: "",
-        //     ec_car: "",
-        //     ec_train: "",
-        //     fpd_road: "",
-        //     fpd_rail: "",
-        //     fpd_ship: "",
-        //     fpd_air: "",
-        //   });
-        // }
       }
     };
 
@@ -330,12 +232,12 @@ function Input() {
         onSubmit={handleSubmit}
         className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8"
       >
-        <h1 className="text-3xl font-bold text-[#820C59] mb-8">
+        <h1 className="text-3xl font-bold text-[#820C59] mb-6">
           Emission Data Form
         </h1>
 
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-[#630944] mb-6">
+          <h2 className="text-xl font-semibold text-[#a24983] mb-4">
             Mandatory Information
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

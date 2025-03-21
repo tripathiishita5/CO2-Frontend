@@ -9,6 +9,7 @@ import UserAccess from "./Pages/UserAccess";
 import Dashboard from "./Pages/Dashboard/Table";
 import Input from "./Pages/Input";
 import ActivityScope from "./Pages/ActivityScope";
+import BusinessTravel from "./Pages/BusinessTravel";
 import Unauthorized from "./Pages/Unauthorized";
 import EmissionFactors from "./Pages/EmissionFactors";
 import Navbar from "./Components/Navbar";
@@ -64,6 +65,14 @@ function AppContent() {
           element={
             <ProtectedRoute allowedRoles={["ADMIN"]}>
               <UserAccess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/business-travel"
+          element={
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
+              <BusinessTravel />
             </ProtectedRoute>
           }
         />

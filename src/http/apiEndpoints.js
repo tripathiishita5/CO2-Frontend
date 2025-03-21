@@ -10,7 +10,10 @@ const API_ENDPOINTS = {
     },
     REF: {
         GET_REF_DATA: (type) => `/Ref/getRefData?type=${type}`,
-        GET_EMISSION_FACTORS: "Test/get_emission_factors"
+        GET_EMISSION_FACTORS: "/EF/getEmissionFactors"
+    },
+    BUSINESSTRAVEL: {
+        BUSINESS_TRAVEL: "/BusinessTravel/upsert-business-travel"
     }
 };
 

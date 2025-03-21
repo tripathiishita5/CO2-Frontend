@@ -76,10 +76,10 @@ function ActivityScope() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#820C59]/5 to-[#630944]/5 py-8 px-4">
             <form onSubmit={handleSubmit} className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8">
-                <h1 className="text-3xl font-bold text-[#820C59] mb-8">Activity Scope Form</h1>
+                <h1 className="text-3xl font-bold text-[#820C59] mb-6">Activity Scope Form</h1>
 
                 <div className="mb-8">
-                    <h2 className="text-xl font-semibold text-[#630944] mb-6">Mandatory Information</h2>
+                    <h2 className="text-xl font-semibold text-[#a24983] mb-4">Mandatory Information</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">

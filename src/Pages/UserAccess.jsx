@@ -100,10 +100,10 @@ function UserAccess() {
         <div className="w-full max-w-md">
           <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
             <div className="text-center">
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-[#820C59] mb-4">
                 User Management
               </h1>
-              <p className="mt-2 text-gray-600">Create or update user rights</p>
+              <p className="text-[#a24983] font-semibold mb-2">Create or update user rights</p>
             </div>
             <form onSubmit={handleAdminSubmit} className="space-y-6">
               {/* User ID */}
